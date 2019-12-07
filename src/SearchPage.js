@@ -16,21 +16,6 @@ class SearchPage extends Component {
         this.setState({search: event.target.value});
     }
 
-    componentDidMount() {
-        this.setState({isLoading: true});
-        fetch('/api/invertedindex').then(async data => {
-            var texts = await data.json();
-            var trimText = [];
-            console.log(texts);
-            console.log(trimText);
-            this.setState({
-                texts: trimText,
-                isLoading: false
-            })
-        });
-    }
-
-
     async find(string) {
         let words = string.trim().replace(/\s/g, ',').replace(/\s/g, '');
         let words1 = string.trim().split(/\s/g);
@@ -62,8 +47,7 @@ class SearchPage extends Component {
         return myResult;
     }
 
-    render() {
-        let {isLoading, texts} = this.state;
+    render() {let {isLoading, texts} = this.state;
         let list = texts.map(text =>
             <Row><Col align="justify">{text}</Col></Row>
         );
