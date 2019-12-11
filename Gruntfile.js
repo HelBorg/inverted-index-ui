@@ -9,11 +9,12 @@ module.exports = function(grunt) {
                 exec: 'npm install'
             },
             npm_start: {
-                exec: 'npm start'
+                exec: 'npm run start'
+            },
+            npm_build: {
+                exec: 'npm run build'
             }
         }
-
-
     });
 
     // ===========================================================================
@@ -21,7 +22,11 @@ module.exports = function(grunt) {
     // ===========================================================================
     grunt.loadNpmTasks('grunt-run');
 
-    grunt.registerTask('start', ['run:npm_start']);
-    grunt.registerTask('default', [ 'run:npm_install', 'run:npm_start' ]);
+    grunt.registerTask('start', ['run:npm_install']);
+    grunt.registerTask('default', function() {
+        grunt.task.npm('run:npm_install');
+        grunt.task.run('run:npm_start');
+    });
+    grunt.registerTask('build', ['run:npm_build']);
 
 };

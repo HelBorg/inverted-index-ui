@@ -1,5 +1,5 @@
 import React, {Component} from 'react';
-import {Col, Container, Form, FormGroup, Input, Jumbotron, Row, Navbar} from "reactstrap";
+import {Col, Container, Form, FormGroup, Input, Jumbotron, Row} from "reactstrap";
 
 class SearchPage extends Component {
 
@@ -48,9 +48,22 @@ class SearchPage extends Component {
     }
 
     render() {let {isLoading, texts} = this.state;
-        let list = texts.map(text =>
-            <Row><Col align="justify">{text}</Col></Row>
+        let list_not_empty = false;
+        let list = texts.map(text => {
+                list_not_empty = true;
+                return <Row><Col align="justify">{text}</Col></Row>;
+            }
         );
+        let results = [];
+        if (list_not_empty) {
+            results.push(
+                <div>
+                    <h3 style={{margin_bottom:'10px', margin_top: '30px'}}>Results</h3>
+                    <ul>
+                        {list}
+                    </ul>
+                </div>);
+        }
 
         isLoading = false;
         if (isLoading) {
@@ -68,13 +81,14 @@ class SearchPage extends Component {
 
         return (
             <div class="text">
-                <h3 class="title">Search</h3>
+                <h2 class="title">Web Search</h2>
                 <Form>
                     <FormGroup>
                         <Input type="text" name="text" id="text" placeholder="Write down index"
                                onChange={this.handleChange}/>
                     </FormGroup>
                 </Form>
+                {results}
             </div>);
     }
 }
