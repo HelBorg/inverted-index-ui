@@ -2,9 +2,11 @@
   "name": "inverted-index-ui",
   "version": "0.1.0",
   "private": true,
+  "proxy": "http://84.201.159.73:8080",
   "dependencies": {
     "bootstrap": "^4.4.1",
     "react-bootstrap-typeahead": "^3.4.7",
+    "react-highlight-words": "^0.16.0",
     "react-router-dom": "^5.1.2",
     "react-scripts": "3.2.0",
     "reactstrap": "^8.1.1"

@@ -1,7 +1,14 @@
 .text{
+    margin-top: 90px;
+    margin-right: 10%;
+    margin-left: 10%;
+}
+.search {
     margin-top: 100px;
-    max-width: 700px;
-    margin-left: 25%;
+    max-width: 500px;
+    margin-left: 30%;
+    margin-right: 30%;
+    align-items: center;
 }
 .but{
     margin-left: 10px;
@@ -11,4 +18,20 @@
 }
 .title {
     margin-bottom: 30px;
+}
+.result {
+    margin-top: 5px;
+    margin-bottom: 5px;
+    text-align: left;
+}
+.search_nav {
+    margin-right: 10px;
+    box-sizing: initial;
+}
+.hidden {
+    display: none;
+}
+.highlightClass {
+    color: #060411;
+    background-color: #dbac42;
 }

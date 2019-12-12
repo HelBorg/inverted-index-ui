@@ -1,11 +1,19 @@
 import React from 'react';
-import {Input, Button} from 'reactstrap';
+import {
+    Input,
+    Button,
+    Navbar,
+    Nav,
+    NavbarBrand,
+    NavItem,
+    NavLink,
+    UncontrolledDropdown,
+    DropdownToggle, DropdownMenu, DropdownItem, InputGroup, InputGroupAddon
+} from 'reactstrap';
 
 class Add extends React.Component {
 
-    text = {
-        text: ''
-    };
+    text = "";
 
     constructor(props) {
         super(props);
@@ -17,13 +25,14 @@ class Add extends React.Component {
     handleChange(event) {
         let text = {...this.state.text};
         text.text = event.target.value;
-        this.setState({text: text});
+        this.setState({text: event.target.value});
     }
 
     async handleAdd() {
         const {text} = this.state;
-        console.log(text);
-        await fetch('/api/invertedindex?words=word1', {
+        console.log(this.state);
+        console.log("Sending POST request to /api/invertedindex with text = " + text);
+        await fetch('/api/invertedindex', {
             method: 'POST',
             headers: {
                 'Accept': 'application/json',
@@ -32,13 +41,45 @@ class Add extends React.Component {
             body: JSON.stringify(text),
             credentials: 'include'
         });
+        this.setState({text: this.text});
     }
 
     render() {
-        return <div className="text">
-            <h1> Add text </h1>
-            <Input type="textarea"  style={{marginBottom: 10, height: 400}} name="text" id="text" onChange={this.handleChange}/>
-            <Button onClick={this.handleAdd} color="danger">Add</Button>
+        return <div>
+            <Navbar color="light" light expand="md">
+                <Nav className="mr-auto" navbar>
+                    <NavbarBrand href="/">WebPoisk!!!!</NavbarBrand>
+                    <NavItem>
+                        <NavLink href="/components/">Components</NavLink>
+                    </NavItem>
+                    <NavItem>
+                        <NavLink href="/">Search</NavLink>
+                    </NavItem>
+                    <UncontrolledDropdown nav inNavbar>
+                        <DropdownToggle nav caret>
+                            GitHub
+                        </DropdownToggle>
+                        <DropdownMenu right>
+                            <DropdownItem href="/https://github.com/HelBorg/inverted-index-ui">
+                                Front end
+                            </DropdownItem>
+                            <DropdownItem href="https://github.com/Yowzah/InvertedIndex">
+                                Back end
+                            </DropdownItem>
+                        </DropdownMenu>
+                    </UncontrolledDropdown>
+                </Nav>
+            </Navbar>
+            <div className="text">
+                <h2> Add text </h2>
+                <Input type="textarea"
+                       style={{marginBottom: 10, height: 400}}
+                       name="text"
+                       id="text"
+                       value={this.state.text}
+                       onChange={this.handleChange}/>
+                <Button onClick={this.handleAdd} color="danger">Add</Button>
+            </div>
         </div>;
     }
 }

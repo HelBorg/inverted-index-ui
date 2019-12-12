@@ -22,9 +22,9 @@ module.exports = function(grunt) {
     // ===========================================================================
     grunt.loadNpmTasks('grunt-run');
 
-    grunt.registerTask('start', ['run:npm_install']);
+    grunt.registerTask('start', ['run:npm_start']);
     grunt.registerTask('default', function() {
-        grunt.task.npm('run:npm_install');
+        grunt.task.run('run:npm_install');
         grunt.task.run('run:npm_start');
     });
     grunt.registerTask('build', ['run:npm_build']);
